@@ -1,8 +1,17 @@
 <?php
 $path = $_SERVER['DOCUMENT_ROOT'];
 require_once $path."/attendanceapp/database/database.php";
+function clearTable($dbo, $tabName)
+{
+    $c = "delete from :tabname";
+    $s = $dbo->conn->prepare($c);
+    try {
+        $s->execute([":tabname"=>$tabName]);
+    } catch (PDOException $oo) {
+        
+    }
+}
 $dbo = new Database();
-
 $c = "create table student_details
 (
  id int auto_increment primary key,
@@ -194,5 +203,75 @@ try {
     $s->execute();
 } catch (PDOException $o) {
     echo("<br>duplicate entry");
+}
+
+//if any record already there in the table delete them
+clearTable($dbo, "course_registration"); 
+$c = "insert into course_registration
+(student_id,course_id,session_id)
+values
+(:sid,:cid,:sessid)";
+$s = $dbo->conn->prepare($c);
+//iterate all over all the 24 students
+//for each of them choose max 3 random courses, from 1 to 6
+
+for($i=1;$i<=24;$i++)
+{
+  for($j=0;$j<3;$j++)
+  {
+    $cid=rand(1,6);
+    //insert the selected course into course_registration table
+    //session 1 and student_id $i
+    try {
+        $s->execute([":sid"=>$i,":cid"=>$cid,":sessid"=>1]);
+    } catch (PDOException $pe) {
+        
+    }
+
+    //repeat for session 2
+    $cid=rand(1,6);
+    //insert the selected course into course_registration table
+    //session 1 and student_id $i
+    try {
+        $s->execute([":sid"=>$i,":cid"=>$cid,":sessid"=>2]);
+    } catch (PDOException $pe) {
+        
+    }
+  }  
+}
+
+//if any record already there in the table delete them
+clearTable($dbo, "course_allotment"); 
+$c = "insert into course_allotment
+(faculty_id,course_id,session_id)
+values
+(:fid,:cid,:sessid)";
+$s = $dbo->conn->prepare($c);
+//iterate all over all the 6 teachers
+//for each of them choose max 2 random courses, from 1 to 6
+
+for($i=1;$i<=6;$i++)
+{
+  for($j=0;$j<2;$j++)
+  {
+    $cid=rand(1,6);
+    //insert the selected course into course_allotment table
+    //session 1 and student_id $i
+    try {
+        $s->execute([":fid"=>$i,":cid"=>$cid,":sessid"=>1]);
+    } catch (PDOException $pe) {
+        
+    }
+
+    //repeat for session 2
+    $cid=rand(1,6);
+    //insert the selected course into course_allotment table
+    //session 1 and student_id $i
+    try {
+        $s->execute([":fid"=>$i,":cid"=>$cid,":sessid"=>2]);
+    } catch (PDOException $pe) {
+        
+    }
+  }  
 }
 ?>
