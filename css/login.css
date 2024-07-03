@@ -25,6 +25,7 @@ body
     align-items: center;
     background-color: transparent; 
     border-radius: 10px;
+    transition: all 1s;
 }
 
 .loginform:hover
@@ -117,7 +118,6 @@ body
     height: 45px;
     padding: 5px;
     border-radius: 5px;
-    background-color: rgb(50, 168, 247);
     color: white;
     transition: all 200ms;
 }
@@ -126,4 +126,14 @@ body
 {
     box-shadow: 0 0 100px rgb(242, 88, 201);
     transform: translateY(-5px);
+}
+
+.inactivecolor
+{
+    background-color: rgb(190, 22, 22);
+}
+
+.activecolor
+{
+    background-color: rgb(50, 168, 247);  
 }
