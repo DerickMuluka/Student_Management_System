@@ -10,15 +10,17 @@
     <div class="loginform">
         <div class="inputgroup">
             <input type="text" id="txtUsername" required>
-            <label for="txtusername" id="lblPassword">USER NAME</label>
+            <label for="txtUsername" id="lblUsername">USER NAME</label>
         </div>
         <div class="inputgroup topmarginlarge">
             <input type="password" id="txtPassword" required>
-            <label for="txtpassword" id="lblPassword">PASSWORD</label>
+            <label for="txtPassword" id="lblPassword">PASSWORD</label>
         </div>
         <div class="divcallforaction topmarginlarge">
-            <button class="btnlogin">LOGIN</button>
+            <button class="btnlogin inactivecolor" id="btnLogin">LOGIN</button>
         </div>
     </div>
+    <script src="js/jquery.js"></script>
+    <script src="js/login.js"></script>
 </body>
 </html>
