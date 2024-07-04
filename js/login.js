@@ -14,19 +14,25 @@ function tryLogin()
             beforeSend:function(){
                 //if you want to do something just 
                 //before making the call
-                //alert("about to make an ajax call"); 
+                //alert("about to make an ajax call");
+                $("#diverror").removeClass("applyerrordiv");
+                $("#lockscreen").addClass("applylockscreen");
+                //$("#errormessage").text(""); 
             },
             success:function(rv){
-                //if the ajax call was successful
+                //if the ajax call was successful 
                 //result will be in rv
                 //alert(JSON.stringify(rv));
+                $("#lockscreen").removeClass("applylockscreen");
                 if(rv['status']=="ALL OK")
                 {
                     document.location.replace("attendance.php");
                 }
                 else
                 {
-                    alert(rv['status']);
+                    //alert(rv['status']);
+                    $("#diverror").addClass("applyerrordiv");
+                    $("#errormessage").text(rv['status']);
                 }
             },
             error:function(){
@@ -41,6 +47,8 @@ $(function(e)
 {
     //capture the keyup event
     $(document).on("keyup","input",function(e){
+        $("#diverror").removeClass("applyerrordiv");
+       // $("#errormessage").text(""); 
         let un=$("#txtUsername").val();
         let pw=$("#txtPassword").val();
         if(un.trim() !== "" && pw.trim() !== "")
