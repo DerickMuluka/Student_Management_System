@@ -21,6 +21,11 @@ if(!empty($action))
             session_start();
             $_SESSION['current_user']=$rv['id'];
         }
+        for($i=0;$i<100000;$i++)
+        {
+            for($j=0;$j<1000;$j++)
+            {}
+        }
         //send response
         echo json_encode($rv);
     }
